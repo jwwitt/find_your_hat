@@ -62,14 +62,31 @@ class Field {
         for (let i = 0; i < length; i++) {
             newField[i] = Array(width).fill(fieldCharacter);
         }
+        // Set starting location
+        newField[0][0] = pathCharacter;
+
+        // Create holes
+        const numHoles = Math.floor(length * width * holes_percentage);
+        let holesSum = 0;
+
+        while (holesSum < numHoles) {
+            let randomLength = Math.floor(Math.random() * length);
+            let randomWidth = Math.floor(Math.random() * width);
+            newField[randomLength][randomWidth] = hole;
+
+            holesSum += 1;
+        }
         return newField;
     }
 }
 
 const myField = new Field(Field.generateField(10, 5, 0.2), true);
-console.log(myField.field);
-myField.getInput();
+
 myField.print();
+myField.getInput();
+
+
+
 
 
 
